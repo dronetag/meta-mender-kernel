@@ -20,10 +20,6 @@ python do_mender_kernel_checks() {
     #TODO : know nothing about ubi support, didn't need it and didn't have time to look into it
     bb.fatal("mender-kernel does not currently support mender-image-ubi")
 
-  elif bb.utils.contains('MENDER_FEATURES_ENABLE', 'mender-uboot'    , True, False, d):
-    #TODO : probably would require mender/uboot patches
-    bb.fatal("mender-kernel does not currently support mender-uboot")
-
   ##############################################################################
   elif int(d.expand('${MENDER_BOOT_PART_SIZE_MB}', 0)) <= 0:
     bb.fatal("mender-kernel requires MENDER_BOOT_PART_SIZE_MB > 0")
