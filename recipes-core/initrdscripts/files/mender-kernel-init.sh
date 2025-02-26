@@ -38,12 +38,35 @@ read_args() {
 ################################################################################
 read_args
 
+# Sleep for a given number of seconds
+sleep_bash() {
+    duration=$1
+    start_time=$SECONDS
+    
+    # Loop until the elapsed time is greater than or equal to the duration
+    while (( $SECONDS - $start_time < $duration )); do
+        # Brief sleep to reduce CPU usage
+        :
+    done
+}
+
+
+echo "*************** Init ********************"
+ls /dev
+echo "***********************************"
+
+sleep_bash 5
+
 mkdir  -p                      @@MENDER_BOOT_PART_MOUNT_LOCATION@@
 mount     @@MENDER_BOOT_PART@@ @@MENDER_BOOT_PART_MOUNT_LOCATION@@
 
 mkdir  -p             ${ROOT_MNT}
 mount     ${ROOT_DEV} ${ROOT_MNT}
 cd                    ${ROOT_MNT}
-exec switch_root      ${ROOT_MNT} /sbin/init
+
+echo "*************** Switching to root ${ROOT_MNT} -> /usr/sbin/init ********************"
+
+sleep_bash 10
+exec switch_root      ${ROOT_MNT} /usr/sbin/init
 
 ################################################################################
