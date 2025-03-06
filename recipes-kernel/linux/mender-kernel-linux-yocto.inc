@@ -18,6 +18,9 @@
 ################################################################################
 do_deploy:append() {
     local bootdir="$(dirname ${MENDER_BOOT_PART_MOUNT_LOCATION})"
+    if [ "${bootdir}" = "" ] || [ "${bootdir}" = "/" ]; then
+      bootdir=${MENDER_BOOT_PART_MOUNT_LOCATION}
+    fi
     local src_dir="${B}/${KERNEL_OUTPUT_DIR}"
     local dst_dir="${DEPLOYDIR}/${MENDER/KERNEL_KERN_BUILD_STAGING_DIR}"
 
