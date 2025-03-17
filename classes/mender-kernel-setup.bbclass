@@ -27,10 +27,6 @@ python do_mender_kernel_checks() {
   elif int(d.expand('${MENDER/KERNEL_PART_SIZE_MB}', 0)) <= 0:
     bb.fatal("mender-kernel requires MENDER/KERNEL_PART_SIZE_MB > 0")
 
-  elif bb.utils.contains('MENDER_FEATURES_ENABLE', 'mender-growfs-data', True, False, d):
-    bb.fatal("mender-kernel does not support mender-growfs-data: \n"           \
-             "mender-growfs-data and MENDER_EXTRA_PARTS are mutually exclusive")
-
   ##############################################################################
   if   bb.utils.contains('INITRAMFS_IMAGE_BUNDLE', '1', True, False, d):
     if not d.getVar('INITRAMFS_IMAGE', None):
