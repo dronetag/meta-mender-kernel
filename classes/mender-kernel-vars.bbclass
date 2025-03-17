@@ -28,9 +28,11 @@ MENDER/KERNEL_PART_SIZE_MB_DEFAULT         = "256"
 
 MENDER/KERNEL_INITRAMFS_LINK_NAME        ??= "initramfs.img"
 
+MENDER_KERN_PART_MOUNT_LOCATION            = "/kernel"
 MENDER/KERNEL_KERN_BUILD_STAGING_DIR       = "/mender-kernel/"
 MENDER/KERNEL_KERN_CANDIDATE_MNT_DIR       = "/tmp/kern_candidate"
 MENDER/KERNEL_ROOT_CANDIDATE_MNT_DIR       = "/tmp/root_candidate"
+
 
 ################################################################################
 #FIXME - this should be in mender-core

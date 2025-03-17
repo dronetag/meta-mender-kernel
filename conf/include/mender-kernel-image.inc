@@ -8,12 +8,8 @@
 DEPENDS += "rsync-native"
 
 do_mender_kernel_deploy_to_image_rootfs() {
-  local bootdir="$(dirname ${MENDER_BOOT_PART_MOUNT_LOCATION})"
-  if [ "${bootdir}" = "" ] || [ "${bootdir}" = "/" ]; then
-    bootdir=${MENDER_BOOT_PART_MOUNT_LOCATION}
-  fi
   local src_dir="${DEPLOY_DIR_IMAGE}/${MENDER/KERNEL_KERN_BUILD_STAGING_DIR}"
-  local dst_dir="${IMAGE_ROOTFS}/${bootdir}"
+  local dst_dir="${IMAGE_ROOTFS}/${MENDER_KERN_PART_MOUNT_LOCATION}"
   rm      -f "$dst_dir/"* || :
   install -d "$dst_dir/"
 
