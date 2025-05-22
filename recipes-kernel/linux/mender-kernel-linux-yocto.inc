@@ -38,7 +38,8 @@ do_deploy:append() {
         rm      -fr                                                "$dst_dir/$lnr_name"
         ln      -rs                           "$dst_dir/$dst_name" "$dst_dir/$lnr_name"
       done
-    elif [ -n "${INITRAMFS_IMAGE}"  ]; then
+    # Omit when initramfs is bundled in the fitImage
+    elif [ -n "${INITRAMFS_IMAGE}" ] && [! echo ${KERNEL_IMAGETYPES} | grep -wq "fitImage";]; then
       local src_dir="${DEPLOY_DIR_IMAGE}"
 
       for fstype in ${INITRAMFS_FSTYPES}; do
