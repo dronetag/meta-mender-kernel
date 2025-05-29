@@ -2,7 +2,7 @@ MENDER/KERNEL_PART_A_NAME                  = "kernela"
 MENDER/KERNEL_PART_B_NAME                  = "kernelb"
 MENDER/KERNEL_EXTRA_PARTS                  = "${MENDER/KERNEL_PART_A_NAME} ${MENDER/KERNEL_PART_B_NAME}"
 
-MENDER_EXTRA_PARTS                        += "${MENDER/KERNEL_EXTRA_PARTS}"
+MENDER_EXTRA_PARTS:prepend                 = " ${MENDER/KERNEL_EXTRA_PARTS} "
 MENDER_EXTRA_PARTS[kernela]                = "--label=${MENDER/KERNEL_PART_A_NAME} --source rawcopy --sourceparams=file=${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.kernelimg --fstype=${MENDER/KERNEL_PART_FSTYPE_TO_GEN}"
 MENDER_EXTRA_PARTS[kernelb]                = "--label=${MENDER/KERNEL_PART_B_NAME} --source rawcopy --sourceparams=file=${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.kernelimg --fstype=${MENDER/KERNEL_PART_FSTYPE_TO_GEN}"
 MENDER_EXTRA_PARTS_SIZES_MB[kernela]       = "${MENDER/KERNEL_PART_SIZE_MB}"
