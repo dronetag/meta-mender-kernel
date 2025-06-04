@@ -7,12 +7,16 @@ MENDER_EXTRA_PARTS[kernela]                = "--label=${MENDER/KERNEL_PART_A_NAM
 MENDER_EXTRA_PARTS[kernelb]                = "--label=${MENDER/KERNEL_PART_B_NAME} --source rawcopy --sourceparams=file=${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.kernelimg --fstype=${MENDER/KERNEL_PART_FSTYPE_TO_GEN}"
 MENDER_EXTRA_PARTS_SIZES_MB[kernela]       = "${MENDER/KERNEL_PART_SIZE_MB}"
 MENDER_EXTRA_PARTS_SIZES_MB[kernelb]       = "${MENDER/KERNEL_PART_SIZE_MB}"
+MENDER_EXTRA_PARTS_ORDER[kernela]          = "0"
+MENDER_EXTRA_PARTS_ORDER[kernelb]          = "1"
 
 
 MENDER/KERNEL_PART_A                       = "${@bb.utils.contains('MENDER_FEATURES', 'mender-partuuid', "/dev/disk/by-partuuid/" + (d.getVarFlags('MENDER_EXTRA_PARTS_UUID') or dict()).get('kernela', ''), d.getVar('MENDER_STORAGE_DEVICE_BASE') + d.getVar('MENDER/KERNEL_PART_A_NUMBER'), d)}"
 MENDER/KERNEL_PART_A_NUMBER                = "${@mender_get_extra_parts_offset_by_id(d, "${MENDER/KERNEL_PART_A_NAME}")}"
 MENDER/KERNEL_PART_B                       = "${@bb.utils.contains('MENDER_FEATURES', 'mender-partuuid', "/dev/disk/by-partuuid/" + (d.getVarFlags('MENDER_EXTRA_PARTS_UUID') or dict()).get('kernelb', ''), d.getVar('MENDER_STORAGE_DEVICE_BASE') + d.getVar('MENDER/KERNEL_PART_B_NUMBER'), d)}"
 MENDER/KERNEL_PART_B_NUMBER                = "${@mender_get_extra_parts_offset_by_id(d, "${MENDER/KERNEL_PART_B_NAME}")}"
+
+
 
 MENDER/KERNEL_PART_FSOPTS                ??= "${MENDER/KERNEL_PART_FSOPTS_DEFAULT}"
 MENDER/KERNEL_PART_FSOPTS_DEFAULT          = ""
