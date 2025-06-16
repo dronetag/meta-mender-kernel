@@ -75,6 +75,7 @@ if ! mount |                                      grep -q $KERN_MNT_DIR; then
   log "mounted $KERN_PART @ $KERN_MNT_DIR"
 fi
 
+find $KERN_MNT_DIR -type f -exec rm {} \;
 rsync -avqI $ROOT_MNT_DIR/$KERN_SRC_DIR/*                 $KERN_MNT_DIR --exclude $(basename @@MENDER_BOOT_PART_MOUNT_LOCATION@@)
 
 log "finished updating kernel partition: $KERN_PART"
